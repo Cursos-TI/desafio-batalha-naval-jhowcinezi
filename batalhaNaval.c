@@ -21,44 +21,47 @@ int main() {
         {"10", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0"}
     };
 
-    //Definição do Navio
-    char * navio[3] = {"3", "3", "3"};
-
-    //Navio Vertical
-    for (int substituidor = 0; substituidor < 3; substituidor++)
+    //Navio Cone
+    for (int linha = 0; linha < 3; linha++)
     {
-        int linha_inicial = 2;
+        int linha_inicial = 3;
         int coluna_inicial = 2;
-        tabuleiro[linha_inicial + substituidor][coluna_inicial] = navio[substituidor];
+        
+        for (int coluna = 0; coluna <= linha*2; coluna++)
+        {
+            tabuleiro[linha_inicial + linha - 2][coluna_inicial*2 - linha + coluna] = "1";
+        }
     }
 
-    //Navio Horizontal
-    for (int substituidor = 0; substituidor < 3; substituidor++)
+    //Navio Cruz
+    for (int linha = 0; linha < 3; linha++)
     {
-        int coluna_inicial = 5;
-        int linha_inicial = 2;
-        tabuleiro[linha_inicial][coluna_inicial + substituidor] = navio[substituidor];
+        int linha_inicial = 8;
+        int coluna_inicial = 2;
+        
+        for (int coluna = 0; coluna < 3; coluna++)
+        {
+            tabuleiro[linha_inicial - 2 + linha][coluna_inicial] = "2";
+            tabuleiro[linha_inicial -1][coluna_inicial + coluna -1] = "2";
+        }
     }
 
-    //Navio Diagonal ↘
-    for (int substituidor = 0; substituidor < 3; substituidor++)
+    //Navio Octaedro
+    for (int linha = 0; linha < 3; linha++)
     {
-        int coluna_inicial = 7;
-        int linha_inicial = 7;  
-        tabuleiro[linha_inicial + substituidor][coluna_inicial + substituidor] = navio[substituidor];
-    }
-
-    //Navio Diagonal ↖
-    for (int substituidor = 0; substituidor < 3; substituidor++)
-    {
+        int linha_inicial = 7;
         int coluna_inicial = 4;
-        int linha_inicial = 7;  
-        tabuleiro[linha_inicial - substituidor][coluna_inicial + substituidor] = navio[substituidor];
+        
+        for (int coluna = 0; coluna <= linha*2; coluna++)
+        {
+            tabuleiro[linha_inicial + linha - 2][coluna_inicial*2 - linha + coluna] = "3";
+            tabuleiro[linha_inicial - linha + 2][coluna_inicial*2 - linha + coluna] = "3";
+        }
     }
-    
 
     //Exibição do Tabuleiro
     printf("TABULEIRO DE BATALHA NAVAL\n\n");
+
     for (int linha = 0; linha < qtd_linhas; linha++)
     {
         for (int coluna = 0; coluna < qtd_colunas; coluna++)
@@ -70,5 +73,6 @@ int main() {
     printf("\n\n"); /* Quebra de Linha */
     
     return 0;
+
 
 }
